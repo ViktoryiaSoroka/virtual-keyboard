@@ -50,6 +50,7 @@ body.active {
     text-align: center;
     font-weight: 500;
     line-height: 60px;
+    z-index: 5;
 }
 
 .backspace_key {
@@ -156,6 +157,7 @@ body.active {
 
 .text.active {
     background-color: #2b2b2b;
+    color: #fff;
 }
 
 .keys.keys_night.active {
@@ -180,17 +182,17 @@ body.active {
 }
 
 .change_light_color {
-    width: 100px;
+    width: 80px;
     height: 50px;
     position: absolute;
-    right: 150px;
+    right: 130px;
     top: 15px;
     justify-content: center;
     align-items: center;
 }
 
 .colors_input {
-    width: 100px;
+    width: 80px;
     height: 50px;
     border: none;
     outline: none;
