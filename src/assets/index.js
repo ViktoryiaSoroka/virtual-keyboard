@@ -1,13 +1,5 @@
 const keyboard = [];
 
-function initKeyboard() {
-
-    //  document.onkeydown = function(event) {
-    //      keyboard.push(event.code);
-    //      console.log(keyboard);
-    //  }
-};
-
 initKeyboard();
 
 //function init() {
@@ -65,9 +57,19 @@ function createKeyboard() {
 
     changeLightColor.appendChild(inputColor);
 
+    let keyboardLight = document.createElement('div');
+    keyboardWrapp.appendChild(keyboardLight);
+    keyboardLight.className = 'keyboard_light';
+
     let keyboardKeys = document.createElement('div');
 
     keyboardWrapp.appendChild(keyboardKeys);
+    keyboardKeys.className = 'keyboard_keys';
+
+
+
+
+
 
     let row1 = document.createElement('div');
     row1.className = 'row';
@@ -82,14 +84,21 @@ function createKeyboard() {
 
     keyboardKeys.appendChild(row1);
 
+    let tab = document.createElement('div');
+    tab.className = 'keys';
+    tab.classList.add('tab_key');
+    row1.appendChild(tab);
+    tab.textContent = 'Tab';
 
-    let list1 = ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '|'];
+    let list1 = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '|'];
     for (let div of list1) {
         let keys = document.createElement('div');
         keys.innerHTML = div;
         row1.appendChild(keys);
         keys.className = 'keys';
     }
+
+
 
 
     let row2 = document.createElement('div');
@@ -120,6 +129,120 @@ function createKeyboard() {
 
 
 
+
 };
 
 createKeyboard();
+
+
+function initKeyboard() {
+    let keys = document.querySelectorAll('.keys');
+    let spaceKey = document.querySelector('.space_key');
+    let shiftLeft = document.querySelector('.shift_left');
+    let shiftRight = document.querySelector('.shift_right');
+    let capsLockKey = document.querySelector('.caps_lock_key');
+
+
+
+
+
+
+
+
+    for (let i = 0; i < keys.length; i++) {
+        keys[i].setAttribute('keyname', keys[i].innerText);
+        keys[i].setAttribute('lowerCaseName', keys[i].innerText.toLowerCase());
+    }
+
+    window.addEventListener('keydown', (e) => {
+        for (let i = 0; i < keys.length; i++) {
+            if (e.key == keys[i].getAttribute('keyname') || e.key == keys[i].getAttribute('lowerCaseName'))
+                //keys[i].classList.add('active');
+                console.log(keys[i]);
+        };
+        if (e.code == 'Space') {
+            spaceKey.classList.add('active');
+        }
+        if (e.code == 'ShiftLeft') {
+            shiftRight.classList.remove('active');
+        }
+        if (e.code == 'ShiftRight') {
+            shiftLeft.classList.remove('active');
+        }
+        if (e.code == 'CapsLock') {
+            capsLockKey.classList.toggle('active');
+        }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        for (let i = 0; i < keys.length; i++) {
+            if (e.key == keys[i].getAttribute('keyname') || e.key == keys[i].getAttribute('lowerCaseName'))
+                keys[i].classList.remove('active');
+            keys[i].classList.add('remove');
+        }
+        if (e.code == 'Space') {
+            spaceKey.classList.remove('active');
+            spaceKey.classList.add('remove');
+        }
+        if (e.code == 'ShiftLeft') {
+            shiftRight.classList.remove('active');
+            shiftRight.classList.add('remove');
+        }
+
+        if (e.code == 'ShiftRight') {
+            shiftLeft.classList.remove('active');
+            shiftLeft.classList.add('remove');
+        }
+
+        //    setTimeout(() => {
+        //        keys[i].classList.remove('remove');
+        //    },200)
+
+
+    });
+
+
+};
+
+initKeyboard();
+
+function initNightMode() {
+    let keys = document.querySelectorAll('.keys');
+    let nightMode = document.querySelector('.night_mode');
+    let toggleCircle = document.querySelector('.toggle_circle');
+    let body = document.querySelector('body');
+    let keyboardWrapp = document.querySelector('.keyboard_wrapp');
+    let textInput = document.querySelector('.text');
+    let changeLightColor = document.querySelector('.change_light_color');
+
+
+    nightMode.addEventListener('click', () => {
+        toggleCircle.classList.toggle('active');
+        body.classList.toggle('active');
+        nightMode.classList.toggle('active');
+        keyboardWrapp.classList.toggle('active');
+        textInput.classList.toggle('active');
+        changeLightColor.classList.toggle('active');
+
+        for (let i = 0; i < keys.length; i++) {
+            keys[i].classList.toggle('keys_night');
+        }
+    });
+}
+
+initNightMode();
+
+function changeColor() {
+    let keys = document.querySelectorAll('.keys');
+    let colorsInput = document.querySelector('.colors_input');
+    let keyboardLight = document.querySelector('.keyboard_light');
+
+    colorsInput.addEventListener('input', () => {
+        for (let i = 0; i < keys.length; i++) {
+            keys[i].style.color = colorsInput.value;
+        }
+        keyboardLight.style.background = colorsInput.value;
+    });
+}
+
+changeColor();
