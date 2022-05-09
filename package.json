@@ -1,0 +1,16 @@
+{
+  "name": "virtual-keyboard",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./src/assets/"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^19.0.4"
+  },
+  "react": {
+    "version": "detect"
+  }
+}
